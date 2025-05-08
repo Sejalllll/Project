@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Waste Classifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1 class="main-title">🌍 Smart Waste Classification System</h1>
+
+    <div class="form-container">
+        <div class="container">
+            <form action="/predict" method="post" enctype="multipart/form-data">
+                <input type="file" name="image" required>
+                <input type="number" name="moisture" step="0.1" placeholder="Moisture (%)" required>
+                <input type="number" name="temperature" step="0.1" placeholder="Temperature (°C)" required>
+                <input type="number" name="gas" step="0.1" placeholder="Gas Level (ppm)" required>
+                <input type="submit" value="Classify Waste">
+            </form>
+
+            {% if prediction %}
+            <div class="result">
+                <p><strong>Prediction:</strong> {{ prediction }}</p>
+                <p><strong>Confidence:</strong> {{ confidence }}%</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
